@@ -1,0 +1,22 @@
+{
+  "name": "getir_hackathon",
+  "version": "1.0.0",
+  "description": "hackathon task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/impossiblity/getirHackathon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/impossiblity/getirHackathon/issues"
+  },
+  "homepage": "https://github.com/impossiblity/getirHackathon#readme",
+  "dependencies": {
+    "mongoose": "^4.9.1"
+  }
+}
