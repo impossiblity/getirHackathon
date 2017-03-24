@@ -13,7 +13,7 @@ module.exports = function() {
     GroupSchema.methods.findClosest = function(cb, lim) {
         return this.model('Group').find({
             location: {$nearSphere: this.location},
-            owner: {$ne: this.owner}
+            _id: {$ne: this._id}
         }).limit(lim).exec(cb);
     };
 
