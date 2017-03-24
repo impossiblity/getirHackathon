@@ -67,7 +67,7 @@ app.post('/createGroup',function(request, response){
                 return;
             }
         ).catch( function(error){
-                handleDatabaseFail(response, error);
+                handleWrongSchema(response, error);
                 mongoose.disconnect();
                 return;
         });
