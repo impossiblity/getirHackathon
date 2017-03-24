@@ -20,13 +20,14 @@ mongoose.connect('mongodb://localhost/hackathonDatabase', function(err) {
     if (err) {
       throw err;
     }
-    // create all of the dummy locations
+    //Test group creation
     async.each(data, function(item, cb) {
       Group.create(item, cb);
     }, function(err) {
       if (err) {
         throw err;
       }
+      //Test closest group finding
       Group.find({owner: 'me'}, function(err, res) {
         if (err) {
           throw err;
