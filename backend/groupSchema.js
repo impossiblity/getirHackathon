@@ -12,10 +12,12 @@ module.exports = function() {
         people: [String]
     });
 
-    GroupSchema.methods.findClosest = function(cb, lim) {
+    GroupSchema.methods.findClosest = function(lim, cb) {
         return this.model('Group').find({
             location: {$nearSphere: this.location},
-            _id: {$ne: this._id}
+            _id: {$ne: this._id},
+            startTime: {$lt: this.endTime},
+            endTime: {$gt: this.startTime},
         }).limit(lim).exec(cb);
     };
 
