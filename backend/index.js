@@ -38,9 +38,10 @@ function handleCreated(response){
     response.end();
 }
 
-function handleOK(response){
+function handleOK(response, content){
     response.statusCode = 200;
-    response.end();
+    response.setHeader('Content-Type', 'text/json');
+    response.end(JSON.stringify(content));
 }
 
 //create endpoint handler
@@ -87,7 +88,7 @@ app.post('/joinGroup', function(request, response){
             }
             else{
                 Group.update({people: res[0].people.concat([request.body.person])}).then(function(){
-                    handleOK(response);
+                    handleOK(response, {});
                     mongoose.disconnect();
                 }).catch(function(err){
                     if(err){
@@ -104,6 +105,36 @@ app.post('/joinGroup', function(request, response){
         });
     });
 });
+
+app.post('/searchGroup', function(request, response){
+    var searchGroup = new Group(request.body);
+
+    //check for schema errors
+    var error = searchGroup.validateSync();
+    if(error) {
+        handleWrongSchema(response, error);
+        return;
+    }
+
+    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+        if (error) {
+            handleDatabaseFail(response, error);
+            mongoose.disconnect();
+            return;
+        }
+        var closest = searchGroup.findClosest(2, function(err, res){
+            if(err){
+                handleDatabaseFail(response, err);
+                mongoose.disconnect();
+                return;
+            }
+            handleOK(response, res);
+            mongoose.disconnect();
+            return;
+        });
+    });
+});
+
 
 
 //Starts HTTP Server
