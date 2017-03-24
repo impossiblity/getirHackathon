@@ -4,7 +4,11 @@ require('./groupSchema.js')();
 var Group = mongoose.model('Group');
 
 var data = [
-  { owner: 'me', location: [0.0, 0.0], startTime: new Date(), endTime: new Date(), people: [] }
+  { owner: 'me', location: [0.0, 0.0], startTime: new Date(), endTime: new Date(), people: [] },
+  { owner: 'a', location: [2.0, 0.0], startTime: new Date(), endTime: new Date(), people: [] },
+  { owner: 'b', location: [10.0, 1.0], startTime: new Date(), endTime: new Date(), people: [] },
+  { owner: 'c', location: [0.0, 5.0], startTime: new Date(), endTime: new Date(), people: [] },
+  { owner: 'd', location: [0.0, 1.0], startTime: new Date(), endTime: new Date(), people: [] },
 ];
 
 mongoose.connect('mongodb://localhost/hackathonDatabase', function(err) {
@@ -23,20 +27,22 @@ mongoose.connect('mongodb://localhost/hackathonDatabase', function(err) {
       if (err) {
         throw err;
       }
-      // create the location we want to search for
-      //var coords = {type: 'Point', coordinates: [-5, 5]};
-      // search for it
-      /*
-      Location.find({loc: {$near: coords}}).limit(1).exec(function(err, res) {
+      Group.find({owner: 'me'}, function(err, res) {
         if (err) {
           throw err;
         }
-        console.log('Closest to %s is %s', JSON.stringify(coords), res);
-        cleanup();
-      });
-      */
+
+        res[0].findClosest(function(err, closest) {
+          if (err) {
+            console.log(err)
+            throw err;
+          }
+
+          console.log('%s is closest to %s', res[0], closest);
+      }, 2 );
+        });
+        });
     });
-  });
 });
 
 function cleanup() {

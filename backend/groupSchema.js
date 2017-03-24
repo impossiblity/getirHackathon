@@ -10,11 +10,11 @@ module.exports = function() {
         people: [String]
     });
 
-    GroupObject.methods.findClosest = function(cb) {
+    GroupSchema.methods.findClosest = function(cb, lim) {
         return this.model('Group').find({
             location: {$nearSphere: this.location},
-            name: {$ne: this.name}
-        }).limit(1).exec(cb);
+            owner: {$ne: this.owner}
+        }).limit(lim).exec(cb);
     };
 
     mongoose.model('Group', GroupSchema);
