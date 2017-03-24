@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         populateAutoComplete();
 
         if (sharedPreference.getStringValue(SharedPreference.EMAIL) != null)
-            startActivity(new Intent(this, GetirMainActivity.class));
+            startActivity(new Intent(this, GetirMapsActivity.class));
 
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -158,7 +158,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             sharedPreference.setStringValue(SharedPreference.EMAIL, mEmailView.getText().toString());
             sharedPreference.setStringValue(SharedPreference.PASSWORD, mPasswordView.getText().toString());
             // TODO web service çağrısı buraya eklenecek.
-            startActivity(new Intent(LoginActivity.this, GetirMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GetirMapsActivity.class));
         }
     }
 
