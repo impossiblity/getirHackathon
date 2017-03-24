@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/impossiblity/getirHackathon/issues"
   },
-  "homepage": "https://github.com/impossiblity/getirHackathon#readme"
+  "homepage": "https://github.com/impossiblity/getirHackathon#readme",
+  "dependencies": {
+    "mongoose": "^4.9.1"
+  }
 }
