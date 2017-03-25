@@ -48,6 +48,7 @@ function handleOK(response, content){
 
 //create endpoint handler
 app.post('/createGroup',function(request, response){
+    console.log(request.body)
     var newGroup = new Group(request.body);
 
     //check for schema errors
