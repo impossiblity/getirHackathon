@@ -2,6 +2,7 @@ const http = require('http');
 
 //Error handler for database failures.
 module.exports.handleDatabaseFail = function(response, error) {
+    console.log(error)
     response.statusCode = 500;
     response.setHeader('Content-Type', 'text/plain');
     response.end(error.toString());
