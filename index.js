@@ -91,7 +91,17 @@ mongoose.connect(mongo_url, function(error) {
           httpHandler.handleWrongSchema(response, error);
       }
       else{
-          var closest = searchGroup.findClosest(parseInt(request.params.maxGroups)).then(function(res){
+              var closest = searchGroup.findClosest(parseInt(request.params.maxGroups)).then(function(res){
+
+              var arr = [];
+              for(var i = 0; i < res.length; i++){
+                  arr[i] = {};
+                  Object.assign(arr[i], res[i]._doc);
+                  arr[i].distance = utils.distance(res[i].location, request.body.location);
+                  arr[i].timeDifference = utils.timeOverlap(res[i].startTime, res[i].endTime, request.body.startTime, request.body.endTime);
+                  console.log(arr[i]);
+              }
+
               httpHandler.handleOK(response, res);
           }). catch(function(err){
               httpHandler.handleDatabaseFail(response, err);
