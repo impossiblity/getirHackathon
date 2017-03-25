@@ -59,7 +59,7 @@ mongoose.connect(mongo_url, function(error) {
              httpHandler.handleWrongSchema(response, 'Already in group.');
          }
          else{
-             Group.update({people: res[0].people.concat([request.body.person])}).then(function(res){
+             Group.update({_id: ObjectId(request.body._id)}, {people: res[0].people.concat([request.body.person])}).then(function(res){
                  redis.set(res._id, JSON.stringify(res), function(error){
                      if(error){
                          httpHandler.handleDatabaseFail(response, error);
