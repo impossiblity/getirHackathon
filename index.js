@@ -42,7 +42,7 @@ mongoose.connect(mongo_url, function(error) {
                   httpHandler.handleDatabaseFail(response, error);
               }
               else {
-                  httpHandler.handleCreated(response);
+                  httpHandler.handleCreated(response, res);
               }
           });
           return;
@@ -59,13 +59,13 @@ mongoose.connect(mongo_url, function(error) {
              httpHandler.handleWrongSchema(response, 'Already in group.');
          }
          else{
-             Group.update({_id: ObjectId(request.body._id)}, {people: res[0].people.concat([request.body.person])}).then(function(res){
+             Group.findOneAndUpdate({_id: ObjectId(request.body._id)}, {$push: {people: request.body.person}}, {new:true}).then(function(res){
                  redis.set(res._id, JSON.stringify(res), function(error){
                      if(error){
                          httpHandler.handleDatabaseFail(response, error);
                      }
                      else{
-                         httpHandler.handleOK(response);
+                         httpHandler.handleCreated(response, res);
                      }
                  });
              }).catch(function(err){
@@ -113,9 +113,9 @@ mongoose.connect(mongo_url, function(error) {
       var user = {};
       user.person = request.params.person;
 
-      Group.find({owner: {$eq: user.person}}).then(function(res){
+      Group.find({owner: {$eq: user.person}}).sort('-startTime').then(function(res){
           user.owns = res;
-          Group.find({people: user.person}).then(function(res){
+          Group.find({people: user.person}).sort('-startTime').then(function(res){
               user.participates = res;
               httpHandler.handleOK(response, user);
           });
@@ -123,14 +123,29 @@ mongoose.connect(mongo_url, function(error) {
 
   });
 
-  app.post('/groupDifference', function(request, response){
-      var group1 = request.body.group1;
-      var group2 = request.body.group2;
-      console.log(group1.location);
-      console.log(group2);
-
-      httpHandler.handleOK(response, {distance: utils.distance(group1.location, group2.location),
-        timeOverlap: utils.timeOverlap(group1.startTime, group1.endTime, group2.startTime, group2.endTime)});
+  app.post('/postMessage', function(request, response){
+      if(!request.body.user || !request.body.message || !request.body._id) {
+           httpHandler.handleWrongSchema(response, 'Arguments missing');
+           return;
+       }
+      Group.find({_id: {$eq: request.body._id}}).then(function(res){
+          if(!res) {
+              httpHandler.handleWrongSchema(response, 'Post not found');
+          }
+          else if(request.body.user != res[0].owner && res[0].people.indexOf(request.body.user) == -1) {
+              httpHandler.handleWrongSchema(response, 'User not joined to group');
+          }
+          else {
+              Group.findOneAndUpdate({_id: {$eq: request.body._id}},
+                  {$push: {messages: {user: request.body.user, message: request.body.message}}}, {new: true}).then(function(res){
+                      return httpHandler.handleCreated(response, res);
+                  }).catch(function(error){
+                      httpHandler.handleDatabaseFail(response, error);
+                  });
+          }
+      }).catch(function(error){
+          httpHandler.handleDatabaseFail(response, error);
+      });
   });
 
 
