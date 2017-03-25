@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const redis = require('redis').createClient(process.env.REDIS_URL || 'http://localhost:6379');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
 var httpHandler = require('./httpHandler.js');
 
@@ -73,12 +76,13 @@ mongoose.connect(mongo_url, function(error) {
       }).catch(function(err){
       if(err){
             httpHandler.handleWrongSchema(response, err);
-       }
+       } 
     });
   });
 
   app.post('/searchGroup/:maxGroups', function(request, response){
       var searchGroup = new Group(request.body);
+
 
       //check for schema errors
       var error = searchGroup.validateSync();
