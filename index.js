@@ -48,8 +48,9 @@ function handleOK(response, content){
 
 //create endpoint handler
 app.post('/createGroup',function(request, response){
-    console.log(request.body)
-    var newGroup = new Group(request.body);
+    var body = request.body || request.query;
+    console.log(body)
+    var newGroup = new Group(body);
 
     //check for schema errors
     var error = newGroup.validateSync();
@@ -61,7 +62,7 @@ app.post('/createGroup',function(request, response){
 
     //check for connection errors
     mongoose.connect(mongo_url, function(error) {
-      if (error) {
+        if (error) {
         handleDatabaseFail(response, error);
         return;
       }
@@ -80,19 +81,20 @@ app.post('/createGroup',function(request, response){
 });
 
 app.post('/joinGroup', function(request, response){
+    var body = request.body || request.query;
     mongoose.connect(mongo_url, function(error) {
         if (error) {
             handleDatabaseFail(response, error);
             mongoose.disconnect();
             return;
         }
-        Group.find({_id: ObjectId(request.body._id)}).then(function(res){
-            if(res[0].people.indexOf(request.body.person) > -1 || res[0].owner === request.body.person){
+        Group.find({_id: ObjectId(body._id)}).then(function(res){
+            if(res[0].people.indexOf(body.person) > -1 || res[0].owner === body.person){
                 handleWrongSchema(response, 'Already in group.');
                 mongoose.disconnect();
             }
             else{
-                Group.update({people: res[0].people.concat([request.body.person])}).then(function(){
+                Group.update({people: res[0].people.concat([body.person])}).then(function(){
                     handleOK(response, {});
                     mongoose.disconnect();
                 }).catch(function(err){
@@ -112,7 +114,8 @@ app.post('/joinGroup', function(request, response){
 });
 
 app.post('/searchGroup/:maxGroups', function(request, response){
-    var searchGroup = new Group(request.body);
+    var body = request.body || request.query;
+    var searchGroup = new Group(body);
 
     //check for schema errors
     var error = searchGroup.validateSync();
