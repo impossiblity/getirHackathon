@@ -33,14 +33,13 @@ mongoose.connect('mongodb://localhost/hackathonDatabase', function(err) {
           throw err;
         }
 
-        res[0].findClosest(function(err, closest) {
+        res[0].findClosest(2, function(err, closest) {
           if (err) {
-            console.log(err)
             throw err;
           }
 
           console.log('%s is closest to %s', res[0], closest);
-      }, 2 );
+      });
         });
         });
     });
