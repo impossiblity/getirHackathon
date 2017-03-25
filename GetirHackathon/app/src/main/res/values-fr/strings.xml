@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GetirHackathon</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Connexion ou Inscription</string>
+    <string name="action_sign_in_short">Se Connecter</string>
+    <string name="error_invalid_email">Cette adresse e-mail est incorrecte</string>
+    <string name="error_invalid_password">Ce mot de passe est trop court</string>
+    <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="permission_rationale">"Les autorisations relatives aux contacts sont nécessaires pour fournir les adresses de courrier électronique."</string>
+    <string name="title_activity_getir_maps">Carte</string>
+    <string name="start">Début</string>
+    <string name="endTime">Heure de fin </string>
+    <string name="endDay">Jour de fin</string>
+    <string name="startingTime">Heure de départ</string>
+    <string name="startingDay">Jour de départ</string>
+    <string name="title_activity_group_maps">Carte</string>
+    <string name="groupList">Liste des Groupes</string>
+    <string name="join">Joindre</string>
+    <string name="starting">Début : </string>
+    <string name="ending"> Finiton : </string>
+    <string name="very_close">Fermer</string>
+</resources>

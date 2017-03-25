@@ -82,7 +82,6 @@ public class ChatListActivity extends BaseActivity {
                 Gson gson = new Gson();
                     SearchGroupResponseModel[] responseModel = gson.fromJson(jsonString, SearchGroupResponseModel[].class);
                     if (responseModel != null) {
-                        Log.i("people", responseModel[responseModel.length - 1].getOwner());
 
                         final ArrayList<SearchGroupResponseModel> list = new ArrayList<>(Arrays.asList(responseModel));
 

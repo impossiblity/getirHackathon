@@ -44,8 +44,8 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         if (getIntent().getExtras().getSerializable("chosenGroup") != null) {
             group = (SearchGroupResponseModel) getIntent().getExtras().getSerializable("chosenGroup");
-            txtTimeInfo.setText("Başlangıç : " + CustomDateManager.getDateFromString(group.getStartTime())
-                    + " Bitiş : " +  CustomDateManager.getDateFromString(group.getEndTime()) );
+            txtTimeInfo.setText(getResources().getString(R.string.starting) + " " + CustomDateManager.getDateFromString(group.getStartTime())
+                    + " " + getResources().getString(R.string.ending) + " " +  CustomDateManager.getDateFromString(group.getEndTime()) );
         }
 
         txtJoinGroup.setOnClickListener(new View.OnClickListener() {

@@ -20,9 +20,11 @@ import java.util.ArrayList;
 public class PeopleAdapter extends BaseAdapter {
     ArrayList<SearchGroupResponseModel> list;
     private LayoutInflater layoutInflater;
+    Activity activity;
 
     public PeopleAdapter(ArrayList<SearchGroupResponseModel> list, Activity activity) {
         layoutInflater = LayoutInflater.from(activity);
+        this.activity = activity;
         this.list = list;
     }
 
@@ -61,7 +63,7 @@ public class PeopleAdapter extends BaseAdapter {
         }
 
         viewHolder.txtFirstLetter.setText(String.valueOf(model.getOwner().charAt(0) != 'A' ? model.getOwner().charAt(0) : 'A'));
-        viewHolder.txtDistance.setText(String.valueOf(model.getDistance()).equals("0") ? String.valueOf(model.getDistance()) : "Çok yakın");
+        viewHolder.txtDistance.setText(String.valueOf(model.getDistance()).equals("0") ? String.valueOf(model.getDistance()) : activity.getResources().getString(R.string.very_close));
         viewHolder.txtName.setText(model.getOwner());
         viewHolder.txtTime.setText(model.getTimeDifference());
 

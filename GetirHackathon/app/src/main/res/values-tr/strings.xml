@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GetirHackathon</string>
+    <string name="title_activity_login">Üyle ol</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Şifre </string>
+    <string name="action_sign_in">Giriş Yap veya Kaydol</string>
+    <string name="action_sign_in_short">Kaydol</string>
+    <string name="error_invalid_email">Bu e-mail adresi geçersiz</string>
+    <string name="error_invalid_password">Bu şifre çok kısa</string>
+    <string name="error_incorrect_password">Bu şifre yanlış</string>
+    <string name="error_field_required">Bu alanı girmeniz zorunludur!</string>
+    <string name="permission_rationale">"İletişim bilgileriniz otomatik tamamlama için gereklidir."</string>
+    <string name="title_activity_getir_maps">Harita</string>
+    <string name="start">Başla </string>
+    <string name="endTime">Bitiş Zamanı </string>
+    <string name="endDay">Bitiş Günü</string>
+    <string name="startingTime">Başlayış Zamanı</string>
+    <string name="startingDay">Başlayış Günü</string>
+    <string name="title_activity_group_maps">Harita</string>
+    <string name="groupList">Grup Listesi</string>
+    <string name="join">Katıl</string>
+    <string name="starting">Başlangıç : </string>
+    <string name="ending"> Bitiş : </string>
+    <string name="very_close">Çok yakın</string>
+</resources>

@@ -4,7 +4,7 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -15,10 +15,15 @@
         completions."
     </string>
     <string name="title_activity_getir_maps">Map</string>
-    <string name="history">Başla </string>
-    <string name="endTime">Bitiş Zamanı</string>
-    <string name="endDay">Bitiş Günü</string>
-    <string name="startingTime">Başlangıç Zamanı</string>
-    <string name="startingDay">Başlangıç Günü</string>
+    <string name="start">Start </string>
+    <string name="endTime">Ending Time </string>
+    <string name="endDay">Ending Day</string>
+    <string name="startingTime">Starting Time</string>
+    <string name="startingDay">Starting Day</string>
     <string name="title_activity_group_maps">Map</string>
+    <string name="groupList">Group List</string>
+    <string name="join">Join</string>
+    <string name="starting">Starting : </string>
+    <string name="ending"> Finish : </string>
+    <string name="very_close">Very Close</string>
 </resources>
