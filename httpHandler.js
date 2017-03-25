@@ -23,9 +23,10 @@ module.exports.handleNoResults = function(response) {
     response.end('No Results.\n');
 }
 
-module.exports.handleCreated = function(response){
+module.exports.handleCreated = function(response, data){
     response.statusCode = 201;
-    response.end();
+    response.setHeader('Content-Type', 'text/json');
+    response.end(JSON.stringify(data));
 }
 
 module.exports.handleOK = function(response, content){

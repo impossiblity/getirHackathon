@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 module.exports = function() {
+
     var GroupSchema = new Schema({
         owner: { type: String, required: [true, 'owner is required'] } ,
         location: {type: [Number], index: '2d',
@@ -9,7 +10,8 @@ module.exports = function() {
             required: [true, 'location is required']},
         startTime: {type: Date, required: [true, 'startTime is required']},
         endTime: {type: Date, required: [true, 'endTime is required']},
-        people: [String]
+        people: [String],
+        messages: [{user: String, message: String}]
     });
 
     GroupSchema.pre('validate', function(next) {
