@@ -95,6 +95,20 @@ mongoose.connect(mongo_url, function(error) {
     }
   });
 
+  app.get('/listGroups/:person', function(request, response){
+      var user = {};
+      user.person = request.params.person;
+
+      Group.find({owner: {$eq: user.person}}).then(function(res){
+          user.owns = res;
+          Group.find({people: user.person}).then(function(res){
+              user.participates = res;
+              httpHandler.handleOK(response, user);
+          });
+      });
+
+  });
+
 
 
   //Starts HTTP Server
