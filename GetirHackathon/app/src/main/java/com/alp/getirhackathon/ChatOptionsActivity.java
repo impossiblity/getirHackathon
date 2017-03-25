@@ -27,13 +27,13 @@ public class ChatOptionsActivity extends AppCompatActivity {
 
         btnStartTimePicker = (Button) findViewById(R.id.btn_start_time_picker);
         btnFinishTimePicker = (Button) findViewById(R.id.btn_finish_time_picker);
-        btnStartTimePicker.setText("Başlangıç Zamanı : " + CustomDateManager.getTimeWellFormedString(0));
-        btnFinishTimePicker.setText("Bitiş Zamanı : " + CustomDateManager.getTimeWellFormedString(1));
+        btnStartTimePicker.setText(CustomDateManager.getTimeWellFormedString(0));
+        btnFinishTimePicker.setText(CustomDateManager.getTimeWellFormedString(1));
 
         btnStartDatePicker = (Button) findViewById(R.id.btn_start_date_picker);
         btnFinishDatePicker = (Button) findViewById(R.id.btn_finish_date_picker);
-        btnStartDatePicker.setText("Başlangıç Günü : " + CustomDateManager.getDateWellFormedString(0));
-        btnFinishDatePicker.setText("Bitiş Günü : " + CustomDateManager.getDateWellFormedString(1));
+        btnStartDatePicker.setText(CustomDateManager.getDateWellFormedString(0));
+        btnFinishDatePicker.setText(CustomDateManager.getDateWellFormedString(1));
     }
 
     public void chatOptionsClickListener(View view) {
@@ -45,8 +45,12 @@ public class ChatOptionsActivity extends AppCompatActivity {
                 break;
             case R.id.btn_finish_date_picker:
             case R.id.btn_start_date_picker:
-                DialogFragment newDateFragment = new DatePickerFragment();
+                DialogFragment newDateFragment = new DatePickerFragment((Button) view);
                 newDateFragment.show(getSupportFragmentManager(), "datePicker");
+                break;
+
+            case R.id.pnl_chat_options:
+                //TODO Kontroller yapılacak.
                 break;
         }
     }

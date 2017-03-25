@@ -15,4 +15,9 @@
         completions."
     </string>
     <string name="title_activity_getir_maps">Map</string>
+    <string name="history">Başla </string>
+    <string name="endTime">Bitiş Zamanı</string>
+    <string name="endDay">Bitiş Günü</string>
+    <string name="startingTime">Başlangıç Zamanı</string>
+    <string name="startingDay">Başlangıç Günü</string>
 </resources>
