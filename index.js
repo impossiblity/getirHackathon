@@ -50,6 +50,7 @@ function handleOK(response, content){
 app.post('/createGroup',function(request, response){
     var body = request.body || request.query;
     console.log(body)
+    console.log(request)
     var newGroup = new Group(body);
 
     //check for schema errors
