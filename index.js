@@ -102,7 +102,7 @@ mongoose.connect(mongo_url, function(error) {
                   console.log(arr[i]);
               }
 
-              httpHandler.handleOK(response, res);
+              httpHandler.handleOK(response, arr);
           }). catch(function(err){
               httpHandler.handleDatabaseFail(response, err);
           });
