@@ -25,6 +25,7 @@ function handleWrongSchema(response, error) {
     response.statusCode = 400;
     response.setHeader('Content-Type', 'text/plain');
     response.end(error.toString());
+    console.log(error);
 }
 
 //Error handler for no results.
@@ -52,6 +53,7 @@ app.post('/createGroup',function(request, response){
     //check for schema errors
     var error = newGroup.validateSync();
     if(error) {
+        console.log('here')
         handleWrongSchema(response, error);
         return;
     }
@@ -68,6 +70,7 @@ app.post('/createGroup',function(request, response){
                 return;
             }
         ).catch( function(error){
+                console.log('here2')
                 handleWrongSchema(response, error);
                 mongoose.disconnect();
                 return;
