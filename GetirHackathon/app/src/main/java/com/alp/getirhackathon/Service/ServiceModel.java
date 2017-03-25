@@ -9,4 +9,5 @@ public class ServiceModel {
     public static String CREATE_GROUP = BASEURL + "createGroup";
     public static String SEARCH_GROUP = BASEURL + "searchGroup/25";
     public static String JOIN_GROUP = BASEURL + "joinGroup";
+    public static String GROUP_LIST = BASEURL + "listGroups";
 }

@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alp.getirhackathon.R;
-import com.alp.getirhackathon.Service.SearchGroupResponseModel;
+import com.alp.getirhackathon.Service.ResponseModels.SearchGroupResponseModel;
 
 import java.util.ArrayList;
 

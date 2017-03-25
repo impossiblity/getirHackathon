@@ -33,4 +33,7 @@
     <string name="ooops">Ooops !</string>
     <string name="error_text">Birşeyler yanlış gitti.\nTekrar denemek ister misiniz</string>
     <string name="refresh">Yeniden Dene</string>
+    <string name="group_list">Seçmiş olduğunuz aralıkta bulunan gruplar</string>
+    <string name="your_groups">Açtığınız Gruplar</string>
+    <string name="partipiated_groups">Gruplarınız</string>
 </resources>
