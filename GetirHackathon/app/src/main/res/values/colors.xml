@@ -9,4 +9,8 @@
     <color name="transparent_black">#65000000</color>
     <color name="success">#73DEA5</color>
     <color name="success_transparent">#9973DEA5</color>
+    <color name="successDark">#449D44</color>
+    <color name="darkred">#c91f1f</color>
+    <color name="startButton">#FB6648</color>
+    <color name="startButton_transparent">#99FB6648</color>
 </resources>

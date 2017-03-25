@@ -2,10 +2,11 @@ package com.alp.getirhackathon;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.alp.getirhackathon.Adapter.PeopleAdapter;
 import com.alp.getirhackathon.Service.BundleKeys;
@@ -23,11 +24,17 @@ public class ChatListActivity extends BaseActivity {
 
     private String startTime, finishTime;
     private boolean isMoveOnClicked;
+    private RelativeLayout pnlErrorScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().hide();
         setContentView(R.layout.activity_chat_list);
+
+        pnlErrorScreen = (RelativeLayout) findViewById(R.id.pnl_error_screen);
 
         if (getIntent().getExtras().getString(BundleKeys.STARTTIME) != null) {
             startTime = getIntent().getExtras().getString(BundleKeys.STARTTIME);
@@ -36,10 +43,14 @@ public class ChatListActivity extends BaseActivity {
             startTime = startTime.replace(" / ","/");
             finishTime = finishTime.replace(" / ", "/");
         }
-        if(!isMoveOnClicked)
-            getChatListResponse();
-        else
-            getSearchResponse();
+        if (isConnectingInternet()) {
+            if (!isMoveOnClicked)
+                getChatListResponse();
+            else
+                getSearchResponse();
+        } else {
+            showErrorToast(getString(R.string.no_connection));
+        }
     }
 
     private void getChatListResponse() {
@@ -58,7 +69,13 @@ public class ChatListActivity extends BaseActivity {
         @Override
         public void onResponse(String jsonString) {
             if (jsonString != null) {
-                getSearchResponse();
+                if (isConnectingInternet())
+                    getSearchResponse();
+                else
+                    showErrorToast(getString(R.string.no_connection));
+            } else {
+                showErrorToast(getString(R.string.custom_error));
+                pnlErrorScreen.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -100,6 +117,9 @@ public class ChatListActivity extends BaseActivity {
                             }
                         });
                     }
+            } else {
+                showErrorToast(getString(R.string.custom_error));
+                pnlErrorScreen.setVisibility(View.VISIBLE);
             }
         }
     };

@@ -27,4 +27,10 @@
     <string name="very_close">Çok yakın</string>
     <string name="group_location">Grup Konumu</string>
     <string name="your_location">Konumunuz</string>
+    <string name="no_connection">İnternet Bağlantınızı Kontrol ediniz</string>
+    <string name="joined_succesfully">Sohbete Katıldınız</string>
+    <string name="custom_error">Sunucuyla olan bağlantı kesildi.</string>
+    <string name="ooops">Ooops !</string>
+    <string name="error_text">Birşeyler yanlış gitti.\nTekrar denemek ister misiniz</string>
+    <string name="refresh">Yeniden Dene</string>
 </resources>

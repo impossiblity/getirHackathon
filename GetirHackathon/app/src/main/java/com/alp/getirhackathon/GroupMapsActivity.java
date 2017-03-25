@@ -1,6 +1,5 @@
 package com.alp.getirhackathon;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -20,13 +19,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-
 public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     SearchGroupResponseModel group;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +47,10 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         txtJoinGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getChatListResponse();
+                if (isConnectingInternet())
+                    getChatListResponse();
+                else
+                    showErrorToast(getString(R.string.no_connection));
             }
         });
     }
@@ -69,7 +68,7 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         @Override
         public void onResponse(String jsonString) {
             if (jsonString != null) {
-
+                showSuccessToast(getString(R.string.joined_succesfully));
             }
         }
     };

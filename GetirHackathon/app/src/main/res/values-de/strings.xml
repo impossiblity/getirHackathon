@@ -26,4 +26,10 @@
     <string name="very_close">Schließen</string>
     <string name="group_location">Gruppenstandort</string>
     <string name="your_location">Ihr Standort</string>
+    <string name="no_connection">Bitte überprüfen Sie Ihre Internetverbindung</string>
+    <string name="joined_succesfully">Sie Join Chat</string>
+    <string name="custom_error">Verbindung zum Server wurde getrennt.</string>
+    <string name="ooops">Ooops !</string>
+    <string name="error_text">Etwas ist schief gelaufen.\nWollen Sie es noch einmal versuchen</string>
+    <string name="refresh">Yeniden Dene</string>
 </resources>

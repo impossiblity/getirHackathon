@@ -27,4 +27,10 @@
     <string name="very_close">Fermer</string>
     <string name="group_location">Lieu du groupe</string>
     <string name="your_location">Ton emplacement</string>
+    <string name="no_connection">Vérifiez s\'il vous plaît votre connexion Internet</string>
+    <string name="joined_succesfully">Vous Rejoindre le chat</string>
+    <string name="custom_error">Connexion au serveur a été déconnecté.</string>
+    <string name="ooops">Ooops !</string>
+    <string name="error_text">Quelque chose a mal tourné.\nVoulez-vous essayer à nouveau</string>
+    <string name="refresh">Yeniden Dene</string>
 </resources>

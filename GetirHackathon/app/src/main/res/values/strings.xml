@@ -23,9 +23,15 @@
     <string name="title_activity_group_maps">Map</string>
     <string name="groupList">Group List</string>
     <string name="join">Join</string>
-    <string name="starting">Starting : </string>
+    <string name="starting">Start : </string>
     <string name="ending"> Finish : </string>
     <string name="very_close">Very Close</string>
     <string name="group_location">Group Location</string>
     <string name="your_location">Your Location</string>
+    <string name="no_connection">Check Your Wi-Fi connection</string>
+    <string name="joined_succesfully">You have joined succesfully</string>
+    <string name="custom_error">The connection with the server was lost.</string>
+    <string name="ooops">Ooops !</string>
+    <string name="error_text">Something went wrong.\nWould you like to try again</string>
+    <string name="refresh">Try Again</string>
 </resources>

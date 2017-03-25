@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.alp.getirhackathon.ToolBox.SharedPreference;
+import com.alp.getirhackathon.ToolBox.Toast.CustomErrorToast;
+import com.alp.getirhackathon.ToolBox.Toast.CustomSuccessToast;
 
 /**
  * Created by AlparslanSelçuk on 24.03.2017.
@@ -38,5 +40,15 @@ public class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
+    }
+
+    public void showErrorToast(String text) {
+        CustomErrorToast value = new CustomErrorToast(this);
+        value.showToast(text);
+    }
+
+    public void showSuccessToast(String text) {
+        CustomSuccessToast value = new CustomSuccessToast(this);
+        value.showToast(text);
     }
 }

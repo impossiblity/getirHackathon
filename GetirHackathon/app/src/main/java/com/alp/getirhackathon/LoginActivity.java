@@ -155,7 +155,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             sharedPreference.setStringValue(SharedPreference.USERID, mEmailView.getText().toString().split("@")[0]);
             sharedPreference.setStringValue(SharedPreference.EMAIL, mEmailView.getText().toString());
             sharedPreference.setStringValue(SharedPreference.PASSWORD, mPasswordView.getText().toString());
-            // TODO web service çağrısı buraya eklenecek.
             startActivity(new Intent(LoginActivity.this, GetirMapsActivity.class));
         }
     }
