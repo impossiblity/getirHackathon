@@ -12,6 +12,8 @@ public class SharedPreference {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String USERID = "userId";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
 
 
     public static SharedPreference sharedPreference;

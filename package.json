@@ -4,7 +4,8 @@
   "description": "hackathon task",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/impossiblity/getirHackathon#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "http": "0.0.0",
     "mongoose": "^4.9.1"
   }
 }
