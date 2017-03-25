@@ -12,6 +12,14 @@ module.exports = function() {
         people: [String]
     });
 
+    GroupSchema.pre('validate', function(next) {
+    if (this.startTime> this.endTime) {
+        next(Error('End Time must be greater than Start Time'));
+    } else {
+        next();
+    }
+});
+
     GroupSchema.methods.findClosest = function(lim, cb) {
         return this.model('Group').find({
             location: {$nearSphere: this.location},
@@ -20,6 +28,7 @@ module.exports = function() {
             endTime: {$gt: this.startTime},
         }).limit(lim).exec(cb);
     };
+
 
     mongoose.model('Group', GroupSchema);
 };

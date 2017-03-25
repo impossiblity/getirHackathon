@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 require('./groupSchema.js')();
 var Group = mongoose.model('Group');
 
+const mongo_url = "mongodb://dummyuser:dummypassword@ds137540.mlab.com:37540/heroku_stfxvtk2"
 
 ObjectId = mongoose.Types.ObjectId
 
@@ -56,7 +57,7 @@ app.post('/createGroup',function(request, response){
     }
 
     //check for connection errors
-    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+    mongoose.connect(mongo_url, function(error) {
       if (error) {
         handleDatabaseFail(response, error);
         return;
@@ -67,7 +68,7 @@ app.post('/createGroup',function(request, response){
                 return;
             }
         ).catch( function(error){
-                handleDatabaseFail(response, error);
+                handleWrongSchema(response, error);
                 mongoose.disconnect();
                 return;
         });
@@ -75,7 +76,7 @@ app.post('/createGroup',function(request, response){
 });
 
 app.post('/joinGroup', function(request, response){
-    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+    mongoose.connect(mongo_url, function(error) {
         if (error) {
             handleDatabaseFail(response, error);
             mongoose.disconnect();
@@ -106,7 +107,7 @@ app.post('/joinGroup', function(request, response){
     });
 });
 
-app.post('/searchGroup', function(request, response){
+app.post('/searchGroup/:maxGroups', function(request, response){
     var searchGroup = new Group(request.body);
 
     //check for schema errors
@@ -116,13 +117,13 @@ app.post('/searchGroup', function(request, response){
         return;
     }
 
-    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+    mongoose.connect(mongo_url, function(error) {
         if (error) {
             handleDatabaseFail(response, error);
             mongoose.disconnect();
             return;
         }
-        var closest = searchGroup.findClosest(2, function(err, res){
+        var closest = searchGroup.findClosest(parseInt(request.params.maxGroups), function(err, res){
             if(err){
                 handleDatabaseFail(response, err);
                 mongoose.disconnect();
