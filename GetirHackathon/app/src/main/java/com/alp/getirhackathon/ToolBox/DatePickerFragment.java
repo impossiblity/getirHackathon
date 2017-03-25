@@ -38,6 +38,6 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        btnTimePicker.setText(String.valueOf(day) + " / " + String.valueOf(month) + " / " + String.valueOf(year));
+        btnTimePicker.setText(String.valueOf(year) + " / " + String.valueOf(month) + " / " + String.valueOf(day));
     }
 }

@@ -15,7 +15,7 @@ public class CustomDateManager {
 
     private static void initialize() {
         c = Calendar.getInstance(Locale.getDefault());
-        formatter = new SimpleDateFormat("dd / MM / yyyy", Locale.getDefault());
+        formatter = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
     }
 
