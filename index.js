@@ -59,13 +59,13 @@ mongoose.connect(mongo_url, function(error) {
              httpHandler.handleWrongSchema(response, 'Already in group.');
          }
          else{
-             Group.update({_id: ObjectId(request.body._id)}, {people: res[0].people.concat([request.body.person])}).then(function(res){
+             Group.findOneAndUpdate({_id: ObjectId(request.body._id)}, {$push: {people: request.body.person}}, {new:true}).then(function(res){
                  redis.set(res._id, JSON.stringify(res), function(error){
                      if(error){
                          httpHandler.handleDatabaseFail(response, error);
                      }
                      else{
-                         httpHandler.handleOK(response);
+                         httpHandler.handleCreated(response, res);
                      }
                  });
              }).catch(function(err){
@@ -137,7 +137,7 @@ mongoose.connect(mongo_url, function(error) {
           }
           else {
               Group.findOneAndUpdate({_id: {$eq: request.body._id}},
-                  {messages: res[0].messages.concat([{user: request.body.user, message: request.body.message}])}, {new: true}).then(function(res){
+                  {$push: {messages: {user: request.body.user, message: request.body.message}}}, {new: true}).then(function(res){
                       return httpHandler.handleCreated(response, res);
                   }).catch(function(error){
                       httpHandler.handleDatabaseFail(response, error);
