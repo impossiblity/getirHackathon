@@ -3,6 +3,7 @@ package com.alp.getirhackathon.Service;
 import java.io.Serializable;
 import java.util.List;
 
+import com.alp.getirhackathon.ToolBox.CustomDateManager;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by AlparslanSelçuk on 25.03.2017.
  */
 
-public class SearchGroupResponseModel {
+public class SearchGroupResponseModel implements Serializable {
 
     @SerializedName("_id")
     @Expose
@@ -33,6 +34,31 @@ public class SearchGroupResponseModel {
     @SerializedName("people")
     @Expose
     private List<String> people = null;
+
+    @SerializedName("distance")
+    @Expose
+    private String distance;
+    @SerializedName("timeDifference")
+    @Expose
+    private int timeDifference;
+
+    public String getDistance() {
+        if(distance.contains(","))
+            return distance.split(",")[0];
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getTimeDifference() {
+        return CustomDateManager.printDifference(timeDifference);
+    }
+
+    public void setTimeDifference(Integer timeDifference) {
+        this.timeDifference = timeDifference;
+    }
 
     public String getId() {
         return id;
