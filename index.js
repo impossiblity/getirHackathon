@@ -34,10 +34,13 @@ mongoose.connect(mongo_url, function(error) {
 
       //check for connection errors
       Group.create(newGroup).then(function(res){
-          redis.set(res._id, JSON.stringify(res)).then(function(){
-              httpHandler.handleCreated(response);
-          }).catch(function(err){
-              httpHandler.handleDatabaseFail(response, err);
+          redis.set(res._id, JSON.stringify(res), function(error){
+              if(error){
+                  httpHandler.handleDatabaseFail(response, error);
+              }
+              else {
+                  httpHandler.handleCreated(response);
+              }
           });
           return;
       }
@@ -54,10 +57,13 @@ mongoose.connect(mongo_url, function(error) {
          }
          else{
              Group.update({people: res[0].people.concat([request.body.person])}).then(function(res){
-                 redis.set(res._id, JSON.stringify(res)).then(function(){
-                     httpHandler.handleOK(response);
-                 }).catch(function(err){
-                     httpHandler.handleDatabaseFail(response, err);
+                 redis.set(res._id, JSON.stringify(res), function(error){
+                     if(error){
+                         httpHandler.handleDatabaseFail(response, error);
+                     }
+                     else{
+                         httpHandler.handleOK(response);
+                     }
                  });
              }).catch(function(err){
                 if(err){
