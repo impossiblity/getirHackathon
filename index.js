@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 require('./groupSchema.js')();
 var Group = mongoose.model('Group');
 
+const mongo_url = "mongodb://dummyuser:dummypassword@ds137540.mlab.com:37540/heroku_stfxvtk2"
 
 ObjectId = mongoose.Types.ObjectId
 
@@ -56,7 +57,7 @@ app.post('/createGroup',function(request, response){
     }
 
     //check for connection errors
-    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+    mongoose.connect(mongo_url, function(error) {
       if (error) {
         handleDatabaseFail(response, error);
         return;
@@ -75,7 +76,7 @@ app.post('/createGroup',function(request, response){
 });
 
 app.post('/joinGroup', function(request, response){
-    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+    mongoose.connect(mongo_url, function(error) {
         if (error) {
             handleDatabaseFail(response, error);
             mongoose.disconnect();
@@ -116,7 +117,7 @@ app.post('/searchGroup/:maxGroups', function(request, response){
         return;
     }
 
-    mongoose.connect('mongodb://localhost/hackathonDatabase', function(error) {
+    mongoose.connect(mongo_url, function(error) {
         if (error) {
             handleDatabaseFail(response, error);
             mongoose.disconnect();
