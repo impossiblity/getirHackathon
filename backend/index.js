@@ -106,7 +106,7 @@ app.post('/joinGroup', function(request, response){
     });
 });
 
-app.post('/searchGroup', function(request, response){
+app.post('/searchGroup/:maxGroups', function(request, response){
     var searchGroup = new Group(request.body);
 
     //check for schema errors
@@ -122,7 +122,7 @@ app.post('/searchGroup', function(request, response){
             mongoose.disconnect();
             return;
         }
-        var closest = searchGroup.findClosest(2, function(err, res){
+        var closest = searchGroup.findClosest(parseInt(request.params.maxGroups), function(err, res){
             if(err){
                 handleDatabaseFail(response, err);
                 mongoose.disconnect();
