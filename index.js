@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const redis = require('redis').createClient(process.env.REDIS_URL || 'http://localhost:6379');
+const redis = require('redis').createClient(process.env.REDIS_URL || '//localhost:6379');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
 var httpHandler = require('./httpHandler.js');
+var utils = require('./utils.js');
 
 require('./groupSchema.js')();
 var Group = mongoose.model('Group');
@@ -76,7 +77,7 @@ mongoose.connect(mongo_url, function(error) {
       }).catch(function(err){
       if(err){
             httpHandler.handleWrongSchema(response, err);
-       } 
+       }
     });
   });
 
@@ -110,6 +111,16 @@ mongoose.connect(mongo_url, function(error) {
           });
       });
 
+  });
+
+  app.post('/groupDifference', function(request, response){
+      var group1 = request.body.group1;
+      var group2 = request.body.group2;
+      console.log(group1.location);
+      console.log(group2);
+
+      httpHandler.handleOK(response, {distance: utils.distance(group1.location, group2.location),
+        timeOverlap: utils.timeOverlap(group1.startTime, group1.endTime, group2.startTime, group2.endTime)});
   });
 
 
