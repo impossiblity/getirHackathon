@@ -43,6 +43,7 @@ public class WebServiceRequestAsync extends AsyncTask<Integer, Void, String>  {
 
     public static final int CREATEGROUP = 0;
     public static final int SEARCHGROUP = 1;
+    public static final int JOIN_GROUP = 2;
 
     public WebServiceRequestAsync(Activity activity, WebServiceResponseListener responseListener) {
         this.activity = activity;
@@ -153,6 +154,12 @@ public class WebServiceRequestAsync extends AsyncTask<Integer, Void, String>  {
                 paramsList.add(new KeyValuePair(BundleKeys.LOCATION, bundle.getString(BundleKeys.LOCATION)));
                 paramsList.add(new KeyValuePair("people", ""));
                 return getPostResponse(paramsList, ServiceModel.SEARCH_GROUP);
+            case JOIN_GROUP:
+                paramsList.clear();
+                paramsList.add(new KeyValuePair(BundleKeys.GROUP_ID, bundle.getString(BundleKeys.GROUP_ID)));
+                paramsList.add(new KeyValuePair(BundleKeys.PERSON, bundle.getString(BundleKeys.PERSON)));
+                return getPostResponse(paramsList, ServiceModel.JOIN_GROUP);
+
 
         }
         return null;

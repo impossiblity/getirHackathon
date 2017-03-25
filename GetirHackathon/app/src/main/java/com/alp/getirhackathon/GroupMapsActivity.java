@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.alp.getirhackathon.Service.BundleKeys;
 import com.alp.getirhackathon.Service.SearchGroupResponseModel;
+import com.alp.getirhackathon.Service.WebServiceRequestAsync;
+import com.alp.getirhackathon.Service.WebServiceResponseListener;
 import com.alp.getirhackathon.ToolBox.CustomDateManager;
 import com.alp.getirhackathon.ToolBox.SharedPreference;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,6 +26,7 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     SearchGroupResponseModel group;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +51,28 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         txtJoinGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getChatListResponse();
             }
         });
     }
+
+    private void getChatListResponse() {
+        WebServiceRequestAsync request = new WebServiceRequestAsync(this, getirResponseListener, sharedPreference);
+        Bundle bundle = new Bundle();
+        bundle.putString(BundleKeys.GROUP_ID, group.getId());
+        bundle.putString(BundleKeys.PERSON, sharedPreference.getStringValue(SharedPreference.USERID));
+        request.setParams(bundle);
+        request.showDialog(true);
+        request.execute(WebServiceRequestAsync.JOIN_GROUP);
+    }
+    private WebServiceResponseListener getirResponseListener = new WebServiceResponseListener() {
+        @Override
+        public void onResponse(String jsonString) {
+            if (jsonString != null) {
+
+            }
+        }
+    };
 
 
     @Override

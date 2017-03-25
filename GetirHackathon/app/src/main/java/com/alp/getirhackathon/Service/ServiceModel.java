@@ -8,4 +8,5 @@ public class ServiceModel {
     private static String BASEURL = "https://storm-getir-hackathon.herokuapp.com/";
     public static String CREATE_GROUP = BASEURL + "createGroup";
     public static String SEARCH_GROUP = BASEURL + "searchGroup/25";
+    public static String JOIN_GROUP = BASEURL + "joinGroup";
 }

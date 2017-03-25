@@ -11,5 +11,7 @@ public class BundleKeys {
     public static String ENDTIME = "endTime";
     public static String LOCATION = "location";
     public static String ISMOVEONCLICKED = "isMoveOnClicked";
+    public static String GROUP_ID = "_id";
+    public static String PERSON = "person";
 
 }
