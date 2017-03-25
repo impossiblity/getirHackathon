@@ -1,7 +1,10 @@
 package com.alp.getirhackathon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alp.getirhackathon.Adapter.PeopleAdapter;
@@ -12,12 +15,14 @@ import com.alp.getirhackathon.Service.WebServiceResponseListener;
 import com.alp.getirhackathon.ToolBox.SharedPreference;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ChatListActivity extends BaseActivity {
 
     private String startTime, finishTime;
+    private boolean isMoveOnClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +32,14 @@ public class ChatListActivity extends BaseActivity {
         if (getIntent().getExtras().getString(BundleKeys.STARTTIME) != null) {
             startTime = getIntent().getExtras().getString(BundleKeys.STARTTIME);
             finishTime = getIntent().getExtras().getString(BundleKeys.ENDTIME);
+            isMoveOnClicked = getIntent().getExtras().getBoolean(BundleKeys.ISMOVEONCLICKED);
             startTime = startTime.replace(" / ","/");
             finishTime = finishTime.replace(" / ", "/");
         }
-
-        getChatListResponse();
+        if(!isMoveOnClicked)
+            getChatListResponse();
+        else
+            getSearchResponse();
     }
 
     private void getChatListResponse() {
@@ -76,13 +84,22 @@ public class ChatListActivity extends BaseActivity {
                     if (responseModel != null) {
                         Log.i("people", responseModel[responseModel.length - 1].getOwner());
 
-                        ArrayList<SearchGroupResponseModel> list = new ArrayList<>(Arrays.asList(responseModel));
+                        final ArrayList<SearchGroupResponseModel> list = new ArrayList<>(Arrays.asList(responseModel));
 
                         PeopleAdapter adapter = new PeopleAdapter(list, ChatListActivity.this);
                         ListView listPeople = (ListView) findViewById(R.id.list_people);
                         listPeople.setAdapter(adapter);
 
-
+                        listPeople.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Intent intent = new Intent(view.getContext(), GroupMapsActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("chosenGroup", (Serializable) list.get(i));
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        });
                     }
             }
         }

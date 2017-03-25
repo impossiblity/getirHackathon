@@ -25,6 +25,12 @@ public class CustomDateManager {
         return formatter.format(c.getTime());
     }
 
+    public static String getDateFromString(String time) {
+        String date = time.split("T")[0];
+        date = date.replace("-", "/");
+        return date;
+    }
+
     public static String getTimeWellFormedString(int increment){
         initialize();
         c.add(Calendar.HOUR, increment);
@@ -32,15 +38,11 @@ public class CustomDateManager {
     }
 
     public static String printDifference(int different){
-
         int elapsedDays = different / 60 /24;
         different = different % (60 * 24);
-
         long elapsedHours = (different) / (60);
         different = different % 60;
-
         long elapsedMinutes = different;
-
 
         if (elapsedDays != 0) {
             if (elapsedDays < 7) {
@@ -56,5 +58,4 @@ public class CustomDateManager {
         else
             return null;
     }
-
 }

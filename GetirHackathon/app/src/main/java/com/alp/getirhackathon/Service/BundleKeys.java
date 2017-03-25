@@ -10,5 +10,6 @@ public class BundleKeys {
     public static String STARTTIME = "startTime";
     public static String ENDTIME = "endTime";
     public static String LOCATION = "location";
+    public static String ISMOVEONCLICKED = "isMoveOnClicked";
 
 }

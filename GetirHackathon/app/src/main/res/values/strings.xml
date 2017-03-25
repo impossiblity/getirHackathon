@@ -20,4 +20,5 @@
     <string name="endDay">Bitiş Günü</string>
     <string name="startingTime">Başlangıç Zamanı</string>
     <string name="startingDay">Başlangıç Günü</string>
+    <string name="title_activity_group_maps">Map</string>
 </resources>

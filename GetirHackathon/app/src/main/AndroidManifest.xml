@@ -46,7 +46,10 @@
             android:name=".GetirMapsActivity"
             android:label="@string/title_activity_getir_maps" />
         <activity android:name=".ChatOptionsActivity" />
-        <activity android:name=".ChatListActivity"></activity>
+        <activity android:name=".ChatListActivity" />
+        <activity
+            android:name=".GroupMapsActivity"
+            android:label="@string/title_activity_group_maps"></activity>
     </application>
 
 </manifest>

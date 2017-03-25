@@ -55,8 +55,18 @@ public class ChatOptionsActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), ChatListActivity.class);
                 intent.putExtra(BundleKeys.STARTTIME, btnStartDatePicker.getText().toString() + " " + btnStartTimePicker.getText().toString());
                 intent.putExtra(BundleKeys.ENDTIME, btnFinishDatePicker.getText().toString() + " " + btnFinishTimePicker.getText().toString());
+                intent.putExtra(BundleKeys.ISMOVEONCLICKED, false);
                 startActivity(intent);
                 break;
+
+            case R.id.pnl_chat_options_move:
+                intent = new Intent(view.getContext(), ChatListActivity.class);
+                intent.putExtra(BundleKeys.STARTTIME, btnStartDatePicker.getText().toString() + " " + btnStartTimePicker.getText().toString());
+                intent.putExtra(BundleKeys.ENDTIME, btnFinishDatePicker.getText().toString() + " " + btnFinishTimePicker.getText().toString());
+                intent.putExtra(BundleKeys.ISMOVEONCLICKED, true);
+                startActivity(intent);
+
+
         }
     }
 

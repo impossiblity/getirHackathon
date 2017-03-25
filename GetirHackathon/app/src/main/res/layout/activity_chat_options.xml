@@ -95,7 +95,7 @@
 
     <LinearLayout
         android:id="@+id/pnl_chat_options"
-        android:background="@drawable/style_videos_button"
+        android:background="@drawable/style_options_button"
         android:onClick="chatOptionsClickListener"
         android:layout_alignParentBottom="true"
         style="@style/CustomLinearLayout">
@@ -105,6 +105,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/history"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/okay" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pnl_chat_options_move"
+        android:background="@drawable/style_move_on_button"
+        android:onClick="chatOptionsClickListener"
+        style="@style/CustomLinearLayout"
+        android:layout_above="@id/pnl_chat_options">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Atla"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 
