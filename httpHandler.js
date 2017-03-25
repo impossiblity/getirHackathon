@@ -10,6 +10,7 @@ module.exports.handleDatabaseFail = function(response, error) {
 
 //Error handler for illegal arguments in POST requests.
 module.exports.handleWrongSchema = function (response, error) {
+    console.log(error)
     response.statusCode = 400;
     response.setHeader('Content-Type', 'text/plain');
     response.end(error.toString());
