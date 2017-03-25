@@ -24,4 +24,6 @@
     <string name="starting">Start : </string>
     <string name="ending"> Finish : </string>
     <string name="very_close">Schließen</string>
+    <string name="group_location">Gruppenstandort</string>
+    <string name="your_location">Ihr Standort</string>
 </resources>

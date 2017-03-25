@@ -25,4 +25,6 @@
     <string name="starting">Début : </string>
     <string name="ending"> Finiton : </string>
     <string name="very_close">Fermer</string>
+    <string name="group_location">Lieu du groupe</string>
+    <string name="your_location">Ton emplacement</string>
 </resources>

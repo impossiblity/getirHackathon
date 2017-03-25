@@ -25,4 +25,6 @@
     <string name="starting">Başlangıç : </string>
     <string name="ending"> Bitiş : </string>
     <string name="very_close">Çok yakın</string>
+    <string name="group_location">Grup Konumu</string>
+    <string name="your_location">Konumunuz</string>
 </resources>

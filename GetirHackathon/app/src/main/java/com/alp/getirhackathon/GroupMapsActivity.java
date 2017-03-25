@@ -85,11 +85,11 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         builder.include(ownerMarker);
         if (!ownerMarker.equals(yourLoocation)) {
             builder.include(yourLoocation);
-            mMap.addMarker(new MarkerOptions().position(yourLoocation).title("Your Location"));
-            mMap.addMarker(new MarkerOptions().position(ownerMarker).title("Group Location"));
+            mMap.addMarker(new MarkerOptions().position(yourLoocation).title(getString(R.string.your_location)));
+            mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 14));
         } else {
-            mMap.addMarker(new MarkerOptions().position(ownerMarker).title("Group Location"));
+            mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ownerMarker, 13));
         }
 
