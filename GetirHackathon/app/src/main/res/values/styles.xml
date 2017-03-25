@@ -9,7 +9,6 @@
     </style>
 
     <style name="CustomLinearLayout">
-        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:clickable">true</item>
@@ -33,5 +32,14 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">5dp</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

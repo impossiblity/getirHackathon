@@ -13,4 +13,6 @@
     <color name="darkred">#c91f1f</color>
     <color name="startButton">#FB6648</color>
     <color name="startButton_transparent">#99FB6648</color>
+    <color name="forwardButton">#ffc100</color>
+    <color name="forwardButton_transparent">#99ffc100</color>
 </resources>

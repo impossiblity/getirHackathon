@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><!--  res/drawable/edittext_rounded_corners.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <item android:state_focused="true" android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/forwardButton" />
+            <gradient android:angle="270" android:centerColor="@color/forwardButton_transparent" android:endColor="@color/forwardButton_transparent" android:startColor="@color/forwardButton_transparent" />
+            <stroke android:width="1.5dp" android:color="@color/transparent" />
+        </shape>
+    </item>
+
+    <item android:state_focused="false" android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/forwardButton_transparent" />
+            <gradient android:angle="270" android:centerColor="@color/forwardButton_transparent" android:endColor="@color/forwardButton_transparent" android:startColor="@color/forwardButton_transparent" />
+            <stroke android:width="1.5dp" android:color="@color/transparent" />
+        </shape>
+    </item>
+
+    <item android:state_focused="true" android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/forwardButton_transparent" />
+            <gradient android:angle="270" android:centerColor="@color/forwardButton_transparent" android:endColor="@color/forwardButton_transparent" android:startColor="@color/forwardButton_transparent" />
+            <stroke android:width="1.5dp" android:color="@color/transparent" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+
+    <item android:state_focused="false" android:state_pressed="false">
+        <shape>
+            <gradient android:angle="270" android:centerColor="@color/forwardButton" android:endColor="@color/forwardButton" android:startColor="@color/forwardButton" />
+            <stroke android:width="0.5dp" android:color="@color/forwardButton" />
+        </shape>
+    </item>
+
+    <item android:state_enabled="true">
+        <shape>
+            <padding android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp" />
+        </shape>
+    </item>
+
+</selector>

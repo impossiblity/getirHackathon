@@ -6,7 +6,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.alp.getirhackathon.Service.BundleKeys;
-import com.alp.getirhackathon.Service.SearchGroupResponseModel;
+import com.alp.getirhackathon.Service.ResponseModels.SearchGroupResponseModel;
 import com.alp.getirhackathon.Service.WebServiceRequestAsync;
 import com.alp.getirhackathon.Service.WebServiceResponseListener;
 import com.alp.getirhackathon.ToolBox.CustomDateManager;
@@ -69,6 +69,8 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         public void onResponse(String jsonString) {
             if (jsonString != null) {
                 showSuccessToast(getString(R.string.joined_succesfully));
+            } else {
+                showErrorToast(getString(R.string.custom_error));
             }
         }
     };
@@ -91,8 +93,5 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
             mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ownerMarker, 13));
         }
-
-
-
     }
 }

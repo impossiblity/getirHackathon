@@ -153,7 +153,7 @@ public class GetirMapsActivity extends BaseActivity implements OnMapReadyCallbac
     public void getirMapsOnClickListener(View view) {
         switch (view.getId()) {
             case R.id.fab_move_on:
-                    startActivity(new Intent(view.getContext(), ChatOptionsActivity.class));
+                    startActivity(new Intent(view.getContext(), EventGroupsActivity.class));
                 break;
         }
 
