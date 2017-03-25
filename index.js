@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const redisClient = require('redis').createClient;
-const redis = redisClient(6379, 'localhost');
+const redis = require('redis').createClient(process.env.REDIS_URL || 'http://localhost:6379');
 app.use(bodyParser.json());
 
 var httpHandler = require('./httpHandler.js');
