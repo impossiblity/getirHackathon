@@ -113,9 +113,9 @@ mongoose.connect(mongo_url, function(error) {
       var user = {};
       user.person = request.params.person;
 
-      Group.find({owner: {$eq: user.person}}).then(function(res){
+      Group.find({owner: {$eq: user.person}}).sort('-startTime').then(function(res){
           user.owns = res;
-          Group.find({people: user.person}).then(function(res){
+          Group.find({people: user.person}).sort('-startTime').then(function(res){
               user.participates = res;
               httpHandler.handleOK(response, user);
           });
