@@ -1,13 +1,19 @@
 package com.alp.getirhackathon;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
 
+import com.alp.getirhackathon.Adapter.PeopleAdapter;
 import com.alp.getirhackathon.Service.BundleKeys;
 import com.alp.getirhackathon.Service.SearchGroupResponseModel;
 import com.alp.getirhackathon.Service.WebServiceRequestAsync;
 import com.alp.getirhackathon.Service.WebServiceResponseListener;
 import com.alp.getirhackathon.ToolBox.SharedPreference;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ChatListActivity extends BaseActivity {
 
@@ -66,10 +72,18 @@ public class ChatListActivity extends BaseActivity {
         public void onResponse(String jsonString) {
             if (jsonString != null) {
                 Gson gson = new Gson();
-                SearchGroupResponseModel responseModel = gson.fromJson(jsonString, SearchGroupResponseModel.class);
-                if(responseModel != null) {
-                    responseModel.getPeople();
-                }
+                    SearchGroupResponseModel[] responseModel = gson.fromJson(jsonString, SearchGroupResponseModel[].class);
+                    if (responseModel != null) {
+                        Log.i("people", responseModel[responseModel.length - 1].getOwner());
+
+                        ArrayList<SearchGroupResponseModel> list = new ArrayList<>(Arrays.asList(responseModel));
+
+                        PeopleAdapter adapter = new PeopleAdapter(list, ChatListActivity.this);
+                        ListView listPeople = (ListView) findViewById(R.id.list_people);
+                        listPeople.setAdapter(adapter);
+
+
+                    }
             }
         }
     };

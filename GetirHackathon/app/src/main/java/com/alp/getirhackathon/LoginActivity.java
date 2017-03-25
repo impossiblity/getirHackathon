@@ -151,10 +151,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             focusView.requestFocus();
         } else {
             showProgress(true);
-            UUID uuid = UUID.randomUUID();
-            String randomUUIDString = uuid.toString();
 
-            sharedPreference.setStringValue(SharedPreference.USERID, randomUUIDString);
+            sharedPreference.setStringValue(SharedPreference.USERID, mEmailView.getText().toString().split("@")[0]);
             sharedPreference.setStringValue(SharedPreference.EMAIL, mEmailView.getText().toString());
             sharedPreference.setStringValue(SharedPreference.PASSWORD, mPasswordView.getText().toString());
             // TODO web service çağrısı buraya eklenecek.

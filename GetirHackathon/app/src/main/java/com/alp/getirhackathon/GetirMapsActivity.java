@@ -59,10 +59,10 @@ public class GetirMapsActivity extends BaseActivity implements OnMapReadyCallbac
         mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                mGoogleMap.clear();
-                mGoogleMap.addMarker(new MarkerOptions().position(latLng));
                 sharedPreference.setStringValue(SharedPreference.LATITUDE, String.valueOf(latLng.latitude));
                 sharedPreference.setStringValue(SharedPreference.LONGITUDE, String.valueOf(latLng.longitude));
+                mGoogleMap.clear();
+                mGoogleMap.addMarker(new MarkerOptions().position(latLng));
             }
         });
     }
