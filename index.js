@@ -143,7 +143,7 @@ mongoose.connect(mongo_url, function(error) {
                           console.log(error)
                       }
                       console.log("Obtained from db\n"+res[0])
-                      httpHandler.handleOK(response, res);
+                      httpHandler.handleOK(response, res[0]);
                   });
               }).catch(function(error){
                   httpHandler.handleWrongSchema(response, error);
