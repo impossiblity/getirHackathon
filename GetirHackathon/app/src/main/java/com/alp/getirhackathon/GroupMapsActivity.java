@@ -19,11 +19,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 
 public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     SearchGroupResponseModel group;
+    TextView txtJoinGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
             getSupportActionBar().hide();
         setContentView(R.layout.activity_group_maps);
         TextView txtTimeInfo = (TextView) findViewById(R.id.txt_time_info);
-        TextView txtJoinGroup = (TextView) findViewById(R.id.txt_join);
+        txtJoinGroup = (TextView) findViewById(R.id.txt_join);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -45,6 +47,17 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
                     + " " + getResources().getString(R.string.ending) + " " +  CustomDateManager.getDateFromString(group.getEndTime()) );
         }
 
+        getGroupDetailsResponse();
+
+        setConversationTextView();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, EventGroupsActivity.class ));
+    }
+
+    public void setConversationTextView() {
         if (group.getPeople().contains(sharedPreference.getStringValue(SharedPreference.USERID))
                 || group.getOwner().equals(sharedPreference.getStringValue(SharedPreference.USERID))) {
             txtJoinGroup.setText(R.string.conversation);
@@ -67,6 +80,28 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
             });
         }
     }
+
+    private void getGroupDetailsResponse() {
+        WebServiceRequestAsync request = new WebServiceRequestAsync(this, groupDetailsResponse);
+        Bundle bundle = new Bundle();
+        bundle.putString(BundleKeys.GROUP_ID, group.getId());
+        request.setParams(bundle);
+        request.showDialog(true);
+        request.execute(WebServiceRequestAsync.DETAIL_GROUPS);
+    }
+    private WebServiceResponseListener groupDetailsResponse = new WebServiceResponseListener() {
+        @Override
+        public void onResponse(String jsonString) {
+            if (jsonString != null) {
+                Gson gson = new Gson();
+                SearchGroupResponseModel model = gson.fromJson(jsonString, SearchGroupResponseModel.class);
+                group = model;
+                setConversationTextView();
+            } else {
+                showErrorToast(getString(R.string.custom_error));
+            }
+        }
+    };
 
     private Intent createIntentToMessages() {
         Intent intent = new Intent(GroupMapsActivity.this, MessagesActivity.class);

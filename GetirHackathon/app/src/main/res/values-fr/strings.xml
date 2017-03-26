@@ -10,7 +10,7 @@
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
     <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
     <string name="error_field_required">Ce champ est requis</string>
-    <string name="permission_rationale">"Les autorisations relatives aux contacts sont nécessaires pour fournir les adresses de courrier électronique."</string>
+    <string name="permission_rationale">Les autorisations relatives aux contacts sont nécessaires pour fournir les adresses de courrier électronique.</string>
     <string name="title_activity_getir_maps">Carte</string>
     <string name="start">Début</string>
     <string name="endTime">Heure de fin </string>
@@ -29,7 +29,7 @@
     <string name="joined_succesfully">Vous Rejoindre le chat</string>
     <string name="custom_error">Connexion au serveur a été déconnecté.</string>
     <string name="ooops">Ooops !</string>
-    <string name="my_groups">J'ai assisté à des groupes</string>
+    <string name="my_groups">J\'ai assisté à des groupes</string>
     <string name="error_text">Quelque chose a mal tourné.\nVoulez-vous essayer à nouveau</string>
     <string name="refresh">Refaire</string>
     <string name="group_list">Vous avez choisi dans la gamme de groupes</string>

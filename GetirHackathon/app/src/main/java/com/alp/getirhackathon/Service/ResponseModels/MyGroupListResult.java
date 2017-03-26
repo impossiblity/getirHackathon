@@ -17,7 +17,7 @@ public class MyGroupListResult implements Serializable
     private List<SearchGroupResponseModel> owns = null;
     @SerializedName("participates")
     @Expose
-    private List<Participate> participates = null;
+    private List<SearchGroupResponseModel> participates = null;
 
     public String getPerson() {
         return person;
@@ -35,11 +35,11 @@ public class MyGroupListResult implements Serializable
         this.owns = owns;
     }
 
-    public List<Participate> getParticipates() {
+    public List<SearchGroupResponseModel> getParticipates() {
         return participates;
     }
 
-    public void setParticipates(List<Participate> participates) {
+    public void setParticipates(List<SearchGroupResponseModel> participates) {
         this.participates = participates;
     }
 

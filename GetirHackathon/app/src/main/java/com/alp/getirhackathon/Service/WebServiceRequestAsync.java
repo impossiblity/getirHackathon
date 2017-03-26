@@ -46,6 +46,7 @@ public class WebServiceRequestAsync extends AsyncTask<Integer, Void, String> {
     public static final int JOIN_GROUP = 2;
     public static final int LIST_GROUP = 3;
     public static final int MESSAGE_GROUPS = 4;
+    public static final int DETAIL_GROUPS = 5;
 
     public WebServiceRequestAsync(Activity activity, WebServiceResponseListener responseListener) {
         this.activity = activity;
@@ -199,7 +200,6 @@ public class WebServiceRequestAsync extends AsyncTask<Integer, Void, String> {
                 paramsList.add(new KeyValuePair(BundleKeys.PERSON, bundle.getString(BundleKeys.PERSON)));
                 return getPostResponse(paramsList, ServiceModel.JOIN_GROUP);
             case LIST_GROUP:
-                paramsList.clear();
                 return getGetResponse(ServiceModel.GROUP_LIST + "/" + sharedPreference.getStringValue(SharedPreference.USERID));
             case MESSAGE_GROUPS:
                 paramsList.clear();
@@ -207,7 +207,8 @@ public class WebServiceRequestAsync extends AsyncTask<Integer, Void, String> {
                 paramsList.add(new KeyValuePair(BundleKeys.USER, bundle.getString(BundleKeys.USER)));
                 paramsList.add(new KeyValuePair(BundleKeys.MESSAGE, bundle.getString(BundleKeys.MESSAGE)));
                 return getPostResponse(paramsList, ServiceModel.MESSAGE_GROUPS);
-
+            case DETAIL_GROUPS:
+                return getGetResponse(ServiceModel.DETAILS_GROUPS + "/" + bundle.getString(BundleKeys.GROUP_ID));
         }
         return null;
     }

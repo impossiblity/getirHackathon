@@ -1,5 +1,6 @@
 package com.alp.getirhackathon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class MessagesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        ImageButton pnlAnswer = (ImageButton) findViewById(R.id.img_answer);
+        final ImageButton pnlAnswer = (ImageButton) findViewById(R.id.img_answer);
 
         if (getIntent().getExtras().getSerializable("chosenGroup") != null) {
             group = (SearchGroupResponseModel) getIntent().getExtras().getSerializable("chosenGroup");
@@ -42,10 +43,43 @@ public class MessagesActivity extends BaseActivity {
         pnlAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                closeSoftKeyboard(pnlAnswer);
                 getChatListResponse();
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        getGroupDetailsResponse();
+        Intent intent = new Intent(this, GroupMapsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("chosenGroup", group);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    private void getGroupDetailsResponse() {
+        WebServiceRequestAsync request = new WebServiceRequestAsync(this, groupDetailsResponse);
+        Bundle bundle = new Bundle();
+        bundle.putString(BundleKeys.GROUP_ID, group.getId());
+        request.setParams(bundle);
+        request.showDialog(true);
+        request.execute(WebServiceRequestAsync.DETAIL_GROUPS);
+    }
+    private WebServiceResponseListener groupDetailsResponse = new WebServiceResponseListener() {
+        @Override
+        public void onResponse(String jsonString) {
+            if (jsonString != null) {
+                Gson gson = new Gson();
+                SearchGroupResponseModel model = gson.fromJson(jsonString, SearchGroupResponseModel.class);
+                group = model;
+
+            } else {
+                showErrorToast(getString(R.string.custom_error));
+            }
+        }
+    };
 
     private void getChatListResponse() {
         WebServiceRequestAsync request = new WebServiceRequestAsync(this, getirResponseListener, sharedPreference);

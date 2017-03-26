@@ -38,10 +38,11 @@ public class ChatListActivity extends BaseActivity {
         TextView txtTitle = (TextView) findViewById(R.id.chat_list_title);
         pnlErrorScreen = (RelativeLayout) findViewById(R.id.pnl_error_screen);
 
+        isMoveOnClicked = getIntent().getExtras().getInt(BundleKeys.ISMOVEONCLICKED);
+
         if (getIntent().getExtras().getString(BundleKeys.STARTTIME) != null) {
             startTime = getIntent().getExtras().getString(BundleKeys.STARTTIME);
             finishTime = getIntent().getExtras().getString(BundleKeys.ENDTIME);
-            isMoveOnClicked = getIntent().getExtras().getInt(BundleKeys.ISMOVEONCLICKED);
             startTime = startTime.replace(" / ","/");
             finishTime = finishTime.replace(" / ", "/");
         }
@@ -85,7 +86,7 @@ public class ChatListActivity extends BaseActivity {
                         } else if(isMoveOnClicked == 3) {
                             model = new SearchGroupResponseModel[groupListResult.getParticipates().size()];
                             for (int i = 0; i < groupListResult.getParticipates().size(); i++) {
-                                SearchGroupResponseModel item = groupListResult.getOwns().get(i);
+                                SearchGroupResponseModel item = groupListResult.getParticipates().get(i);
                                 model[i] = item;
                             }
                         }
