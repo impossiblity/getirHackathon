@@ -37,7 +37,7 @@ mongoose.connect(mongo_url, function(error) {
 
       //check for connection errors
       Group.create(newGroup).then(function(res){
-          redis.set(res._id, JSON.stringify(res), function(error){
+          redis.set(res._id.toString(), JSON.stringify(res), function(error){
               if(error){
                   httpHandler.handleDatabaseFail(response, error);
               }
@@ -60,7 +60,7 @@ mongoose.connect(mongo_url, function(error) {
          }
          else{
              Group.findOneAndUpdate({_id: ObjectId(request.body._id)}, {$push: {people: request.body.person}}, {new:true}).then(function(res){
-                 redis.set(res._id, JSON.stringify(res), function(error){
+                 redis.set(res._id.toString(), JSON.stringify(res), function(error){
                      if(error){
                          console.log(error);
                      }
@@ -135,8 +135,8 @@ mongoose.connect(mongo_url, function(error) {
                       httpHandler.handleWrongSchema(response, 'Post not found');
                       return;
                   }
-                  redis.set(String(res._id), JSON.stringify(res), function(error){
-                      console.log("Set to redis.")
+                  redis.set(String(res._id.toString()), JSON.stringify(res), function(error, reply){
+                      console.log("Set to redis. "+reply)
                       if(error){
                           console.log(error)
                       }
@@ -165,7 +165,7 @@ mongoose.connect(mongo_url, function(error) {
           else {
               Group.findOneAndUpdate({_id: {$eq: request.body._id}},
                   {$push: {messages: {user: request.body.user, message: request.body.message}}}, {new: true}).then(function(res){
-                      redis.set(res._id, JSON.stringify(res), function(error){
+                      redis.set(res._id.toString(), JSON.stringify(res), function(error){
                           if(error){
                               console.log(error)
                           }
