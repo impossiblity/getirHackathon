@@ -122,9 +122,11 @@ mongoose.connect(mongo_url, function(error) {
   });
 
   app.get('/getGroupDetail/:id', function(request, response){
-      redis.get(request.params.id, function (err, reply) {
+      redis.get(String(request.params.id), function (err, reply) {
+          console.log(reply)
           if (err) console.log(err)
           else if (reply){ //Book exists in cache
+              console.log("Obtained from cache\n"+reply)
               httpHandler.handleOK(response, JSON.parse(reply));
           }
           else{
@@ -133,12 +135,14 @@ mongoose.connect(mongo_url, function(error) {
                       httpHandler.handleWrongSchema(response, 'Post not found');
                       return;
                   }
-                  redis.set(res._id, JSON.stringify(res), function(error){
+                  redis.set(String(res._id), JSON.stringify(res), function(error){
+                      console.log("Set to redis.")
                       if(error){
                           console.log(error)
                       }
+                      console.log("Obtained from db\n"+res)
+                      httpHandler.handleOK(response, res);
                   });
-                  httpHandler.handleOK(response, res);
               }).catch(function(error){
                   httpHandler.handleWrongSchema(response, error);
               });
