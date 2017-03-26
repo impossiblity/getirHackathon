@@ -62,12 +62,10 @@ mongoose.connect(mongo_url, function(error) {
              Group.findOneAndUpdate({_id: ObjectId(request.body._id)}, {$push: {people: request.body.person}}, {new:true}).then(function(res){
                  redis.set(res._id, JSON.stringify(res), function(error){
                      if(error){
-                         httpHandler.handleDatabaseFail(response, error);
-                     }
-                     else{
-                         httpHandler.handleCreated(response, res);
+                         console.log(error);
                      }
                  });
+                 httpHandler.handleCreated(response, res);
              }).catch(function(err){
                 if(err){
                  httpHandler.handleWrongSchema(response,err);
@@ -140,11 +138,10 @@ mongoose.connect(mongo_url, function(error) {
                   {$push: {messages: {user: request.body.user, message: request.body.message}}}, {new: true}).then(function(res){
                       redis.set(res._id, JSON.stringify(res), function(error){
                           if(error){
-                              httpHandler.handleDatabaseFail(response, error);
+                              console.log(error)
                           }
-                          else{
-                              httpHandler.handleCreated(response, res);
-                          }
+                      });
+                      httpHandler.handleCreated(response, res);
                   }).catch(function(error){
                       httpHandler.handleDatabaseFail(response, error);
                   });
