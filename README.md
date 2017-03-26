@@ -1,5 +1,5 @@
 # getirHackathon
-Submission of team Storm in Getir Hackathon.
+Submission of team Storm in Getir Hackathon. The server is deployed in https://storm-getir-hackathon.herokuapp.com/.
 
 ## Members
 * Kaan Bulut Tekelioglu
@@ -68,4 +68,17 @@ A utility service for people who are looking for companions to travel. The app s
     * ```_id(String)``` Group ID where the message is posted.
   **Response Codes:** 201 Created, 400 Bad Request, 500 Internal Server Error \
   **Remarks:** A user can only post in a group they own or participate in.
+  
+## Technologies Used
+
+* Node.js
+ * mongoose
+ * express
+ * redis
+ * body-parser
+ * http
+* Android
+* MongoDB
+* Redis
+
 
