@@ -31,8 +31,8 @@
     <string name="custom_error">Verbindung zum Server wurde getrennt.</string>
     <string name="ooops">Ooops !</string>
     <string name="error_text">Etwas ist schief gelaufen.\nWollen Sie es noch einmal versuchen</string>
-    <string name="refresh">Yeniden Dene</string>
-    <string name="group_list">Seçmiş olduğunuz aralıkta bulunan gruplar</string>
-    <string name="your_groups">Açtığınız Gruplar</string>
-    <string name="partipiated_groups">Gruplarınız</string>
+    <string name="refresh">Wiederholen</string>
+    <string name="group_list">Sie haben im Bereich von Gruppen ausgewählt</string>
+    <string name="your_groups">Öffnen Sie Ihre Gruppen</string>
+    <string name="partipiated_groups">Ihre Gruppe</string>
 </resources>

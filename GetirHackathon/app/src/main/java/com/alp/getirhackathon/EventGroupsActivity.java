@@ -138,7 +138,10 @@ public class EventGroupsActivity extends BaseActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            sharedPreference.setStringValue(SharedPreference.USERID, "");
+            sharedPreference.setStringValue(SharedPreference.EMAIL, "");
+            sharedPreference.setStringValue(SharedPreference.PASSWORD, "");
+            startActivity(new Intent(EventGroupsActivity.this, LoginActivity.class ));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -52,7 +52,8 @@
         <activity
             android:name=".EventGroupsActivity"
             android:label="@string/title_activity_event_groups"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MessagesActivity"></activity>
     </application>
 
 </manifest>

@@ -32,8 +32,8 @@
     <string name="custom_error">Connexion au serveur a été déconnecté.</string>
     <string name="ooops">Ooops !</string>
     <string name="error_text">Quelque chose a mal tourné.\nVoulez-vous essayer à nouveau</string>
-    <string name="refresh">Yeniden Dene</string>
-    <string name="group_list">Seçmiş olduğunuz aralıkta bulunan gruplar</string>
-    <string name="your_groups">Açtığınız Gruplar</string>
-    <string name="partipiated_groups">Gruplarınız</string>
+    <string name="refresh">Refaire</string>
+    <string name="group_list">Vous avez choisi dans la gamme de groupes</string>
+    <string name="your_groups">Ouvrez vos groupes</string>
+    <string name="partipiated_groups">Votre groupe</string>
 </resources>

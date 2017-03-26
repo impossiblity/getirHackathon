@@ -53,7 +53,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        if (sharedPreference.getStringValue(SharedPreference.EMAIL) != null)
+        if (sharedPreference.getStringValue(SharedPreference.EMAIL) != null &&
+                !TextUtils.isEmpty(sharedPreference.getStringValue(SharedPreference.EMAIL)))
             startActivity(new Intent(this, GetirMapsActivity.class));
 
 
