@@ -121,6 +121,31 @@ mongoose.connect(mongo_url, function(error) {
 
   });
 
+  app.get('/getGroupDetail/:id', function(request, response){
+      redis.get(request.params.id, function (err, reply) {
+          if (err) console.log(err)
+          else if (reply){ //Book exists in cache
+              httpHandler.handleOK(response, JSON.parse(reply));
+          }
+          else{
+              Group.find({_id: {$eq: request.params.id}}).then(function(res){
+                  if(!res) {
+                      httpHandler.handleWrongSchema(response, 'Post not found');
+                      return;
+                  }
+                  redis.set(res._id, JSON.stringify(res), function(error){
+                      if(error){
+                          console.log(error)
+                      }
+                  });
+                  httpHandler.handleOK(response, res);
+              }).catch(function(error){
+                  httpHandler.handleWrongSchema(response, error);
+              });
+          }
+      });
+  });
+
   app.post('/postMessage', function(request, response){
       if(!request.body.user || !request.body.message || !request.body._id) {
            httpHandler.handleWrongSchema(response, 'Arguments missing');
