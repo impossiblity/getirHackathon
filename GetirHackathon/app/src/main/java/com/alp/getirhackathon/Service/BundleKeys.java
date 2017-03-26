@@ -5,7 +5,6 @@ package com.alp.getirhackathon.Service;
  */
 
 public class BundleKeys {
-    // CreateGroup
     public static String OWNER = "owner";
     public static String STARTTIME = "startTime";
     public static String ENDTIME = "endTime";
@@ -13,5 +12,7 @@ public class BundleKeys {
     public static String ISMOVEONCLICKED = "isMoveOnClicked";
     public static String GROUP_ID = "_id";
     public static String PERSON = "person";
+    public static String USER = "user";
+    public static String MESSAGE = "message";
 
 }

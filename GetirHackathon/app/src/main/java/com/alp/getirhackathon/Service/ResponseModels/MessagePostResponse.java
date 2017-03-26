@@ -1,17 +1,11 @@
+
 package com.alp.getirhackathon.Service.ResponseModels;
 
-import java.io.Serializable;
 import java.util.List;
-
-import com.alp.getirhackathon.ToolBox.CustomDateManager;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by AlparslanSelçuk on 25.03.2017.
- */
-
-public class SearchGroupResponseModel implements Serializable {
+public class MessagePostResponse {
 
     @SerializedName("_id")
     @Expose
@@ -31,45 +25,12 @@ public class SearchGroupResponseModel implements Serializable {
     @SerializedName("__v")
     @Expose
     private Integer v;
-    @SerializedName("people")
-    @Expose
-    private List<String> people = null;
-
-    @SerializedName("distance")
-    @Expose
-    private String distance;
-    @SerializedName("timeDifference")
-    @Expose
-    private int timeDifference;
     @SerializedName("messages")
     @Expose
     private List<Message> messages = null;
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
-    public String getDistance() {
-        if(distance != null && distance.contains(","))
-            return distance.split(",")[0];
-        return distance;
-    }
-
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
-
-    public String getTimeDifference() {
-        return CustomDateManager.printDifference(timeDifference);
-    }
-
-    public void setTimeDifference(Integer timeDifference) {
-        this.timeDifference = timeDifference;
-    }
+    @SerializedName("people")
+    @Expose
+    private List<String> people = null;
 
     public String getId() {
         return id;
@@ -117,6 +78,14 @@ public class SearchGroupResponseModel implements Serializable {
 
     public void setV(Integer v) {
         this.v = v;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public List<String> getPeople() {
