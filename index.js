@@ -122,6 +122,8 @@ mongoose.connect(mongo_url, function(error) {
   });
 
   app.get('/getGroupDetail/:id', function(request, response){
+      console.log(request.params)
+      try { var id = mongoose.Types.ObjectId(request.params.id) } catch (error) { httpHandler.handleWrongSchema(response, error); return }
       redis.get(String(request.params.id), function (err, reply) {
           console.log(reply)
           if (err) console.log(err)
@@ -131,16 +133,16 @@ mongoose.connect(mongo_url, function(error) {
           }
           else{
               Group.find({_id: {$eq: request.params.id}}).then(function(res){
-                  if(!res) {
+                  if(res.length < 1) {
                       httpHandler.handleWrongSchema(response, 'Post not found');
                       return;
                   }
-                  redis.set(String(res._id.toString()), JSON.stringify(res), function(error, reply){
+                  redis.set(String(res[0]._id.toString()), JSON.stringify(res[0]), function(error, reply){
                       console.log("Set to redis. "+reply)
                       if(error){
                           console.log(error)
                       }
-                      console.log("Obtained from db\n"+res)
+                      console.log("Obtained from db\n"+res[0])
                       httpHandler.handleOK(response, res);
                   });
               }).catch(function(error){
