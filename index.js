@@ -37,7 +37,7 @@ mongoose.connect(mongo_url, function(error) {
 
       //check for connection errors
       Group.create(newGroup).then(function(res){
-          redis.set(res._id, JSON.stringify(res), function(error){
+          redis.set(res._id.toString(), JSON.stringify(res), function(error){
               if(error){
                   httpHandler.handleDatabaseFail(response, error);
               }
@@ -60,7 +60,7 @@ mongoose.connect(mongo_url, function(error) {
          }
          else{
              Group.findOneAndUpdate({_id: ObjectId(request.body._id)}, {$push: {people: request.body.person}}, {new:true}).then(function(res){
-                 redis.set(res._id, JSON.stringify(res), function(error){
+                 redis.set(res._id.toString(), JSON.stringify(res), function(error){
                      if(error){
                          console.log(error);
                      }
@@ -122,23 +122,29 @@ mongoose.connect(mongo_url, function(error) {
   });
 
   app.get('/getGroupDetail/:id', function(request, response){
-      redis.get(request.params.id, function (err, reply) {
+      console.log(request.params)
+      try { var id = mongoose.Types.ObjectId(request.params.id) } catch (error) { httpHandler.handleWrongSchema(response, error); return }
+      redis.get(String(request.params.id), function (err, reply) {
+          console.log(reply)
           if (err) console.log(err)
           else if (reply){ //Book exists in cache
+              console.log("Obtained from cache\n"+reply)
               httpHandler.handleOK(response, JSON.parse(reply));
           }
           else{
               Group.find({_id: {$eq: request.params.id}}).then(function(res){
-                  if(!res) {
+                  if(res.length < 1) {
                       httpHandler.handleWrongSchema(response, 'Post not found');
                       return;
                   }
-                  redis.set(res._id, JSON.stringify(res), function(error){
+                  redis.set(String(res[0]._id.toString()), JSON.stringify(res[0]), function(error, reply){
+                      console.log("Set to redis. "+reply)
                       if(error){
                           console.log(error)
                       }
+                      console.log("Obtained from db\n"+res[0])
+                      httpHandler.handleOK(response, res[0]);
                   });
-                  httpHandler.handleOK(response, res);
               }).catch(function(error){
                   httpHandler.handleWrongSchema(response, error);
               });
@@ -161,7 +167,7 @@ mongoose.connect(mongo_url, function(error) {
           else {
               Group.findOneAndUpdate({_id: {$eq: request.body._id}},
                   {$push: {messages: {user: request.body.user, message: request.body.message}}}, {new: true}).then(function(res){
-                      redis.set(res._id, JSON.stringify(res), function(error){
+                      redis.set(res._id.toString(), JSON.stringify(res), function(error){
                           if(error){
                               console.log(error)
                           }

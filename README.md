@@ -51,6 +51,12 @@ A utility service for people who are looking for companions to travel. The app s
     * ```distance(Double)``` Distance to the group 
     * ```timeDifference(Double)``` Total overlapping time between you and the group's schedule.
     
+* **Title:** Get Details of a Group \
+  **URL:** /getGroupDetail/:id \
+  **Type:** GET \
+  **Response Codes:** 200 OK, 400 Bad Request, 500 Internal Server Error \
+  **Remarks:** Returns the group details  
+    
 * **Title:** List Groups of a Person \
   **URL:** /listGroups/:person \
   **Type:** GET \
