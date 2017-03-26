@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">GetirHackathon</string>
     <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Connexion ou Inscription</string>
@@ -31,9 +29,12 @@
     <string name="joined_succesfully">Vous Rejoindre le chat</string>
     <string name="custom_error">Connexion au serveur a été déconnecté.</string>
     <string name="ooops">Ooops !</string>
+    <string name="my_groups">J'ai assisté à des groupes</string>
     <string name="error_text">Quelque chose a mal tourné.\nVoulez-vous essayer à nouveau</string>
     <string name="refresh">Refaire</string>
     <string name="group_list">Vous avez choisi dans la gamme de groupes</string>
     <string name="your_groups">Ouvrez vos groupes</string>
     <string name="partipiated_groups">Votre groupe</string>
+    <string name="logoff">Abmelden</string>
+    <string name="conversation">conversation</string>
 </resources>

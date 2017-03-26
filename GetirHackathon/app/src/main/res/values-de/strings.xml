@@ -30,9 +30,11 @@
     <string name="joined_succesfully">Sie Join Chat</string>
     <string name="custom_error">Verbindung zum Server wurde getrennt.</string>
     <string name="ooops">Ooops !</string>
+    <string name="my_groups">Ich besuchte Gruppen</string>
     <string name="error_text">Etwas ist schief gelaufen.\nWollen Sie es noch einmal versuchen</string>
     <string name="refresh">Wiederholen</string>
     <string name="group_list">Sie haben im Bereich von Gruppen ausgewählt</string>
     <string name="your_groups">Öffnen Sie Ihre Gruppen</string>
     <string name="partipiated_groups">Ihre Gruppe</string>
+    <string name="conversation">Konversation</string>
 </resources>

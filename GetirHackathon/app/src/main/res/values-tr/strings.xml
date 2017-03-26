@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">GetirHackathon</string>
     <string name="title_activity_login">Üyle ol</string>
-
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Şifre </string>
     <string name="action_sign_in">Giriş Yap veya Kaydol</string>
@@ -31,10 +29,14 @@
     <string name="joined_succesfully">Sohbete Katıldınız</string>
     <string name="custom_error">Sunucuyla olan bağlantı kesildi.</string>
     <string name="ooops">Ooops !</string>
-    <string name="my_groups">Gruplarım</string>
+    <string name="my_groups">Katıldığım Gruplar</string>
     <string name="error_text">Birşeyler yanlış gitti.\nTekrar denemek ister misiniz</string>
     <string name="refresh">Yeniden Dene</string>
     <string name="group_list">Seçmiş olduğunuz aralıkta bulunan gruplar</string>
     <string name="your_groups">Açtığınız Gruplar</string>
     <string name="partipiated_groups">Gruplarınız</string>
+    <string name="logoff">Çıkış Yap</string>
+    <string name="conversation">Sohbet</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

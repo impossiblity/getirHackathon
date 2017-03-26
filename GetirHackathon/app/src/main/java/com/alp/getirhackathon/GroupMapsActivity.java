@@ -1,5 +1,6 @@
 package com.alp.getirhackathon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -44,15 +45,35 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
                     + " " + getResources().getString(R.string.ending) + " " +  CustomDateManager.getDateFromString(group.getEndTime()) );
         }
 
-        txtJoinGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isConnectingInternet())
-                    getChatListResponse();
-                else
-                    showErrorToast(getString(R.string.no_connection));
-            }
-        });
+        if (group.getPeople().contains(sharedPreference.getStringValue(SharedPreference.USERID))
+                || group.getOwner().equals(sharedPreference.getStringValue(SharedPreference.USERID))) {
+            txtJoinGroup.setText(R.string.conversation);
+            txtJoinGroup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(createIntentToMessages());
+                }
+            });
+        } else {
+            txtJoinGroup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isConnectingInternet()) {
+                        getChatListResponse();
+                        startActivity(createIntentToMessages());
+                    } else
+                        showErrorToast(getString(R.string.no_connection));
+                }
+            });
+        }
+    }
+
+    private Intent createIntentToMessages() {
+        Intent intent = new Intent(GroupMapsActivity.this, MessagesActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("chosenGroup", group);
+        intent.putExtras(bundle);
+        return intent;
     }
 
     private void getChatListResponse() {
@@ -75,20 +96,25 @@ public class GroupMapsActivity extends BaseActivity implements OnMapReadyCallbac
         }
     };
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng ownerMarker = new LatLng(group.getLocation().get(0), group.getLocation().get(1));
-        LatLng yourLoocation = new LatLng(Double.parseDouble(sharedPreference.getStringValue(SharedPreference.LATITUDE)),
+        LatLng yourLocation = new LatLng(Double.parseDouble(sharedPreference.getStringValue(SharedPreference.LATITUDE)),
                 Double.parseDouble(sharedPreference.getStringValue(SharedPreference.LONGITUDE)));
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(ownerMarker);
-        if (!ownerMarker.equals(yourLoocation)) {
-            builder.include(yourLoocation);
-            mMap.addMarker(new MarkerOptions().position(yourLoocation).title(getString(R.string.your_location)));
-            mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 14));
+        if (!ownerMarker.equals(yourLocation) ) {
+            try {
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(ownerMarker);
+                builder.include(yourLocation);
+                mMap.addMarker(new MarkerOptions().position(yourLocation).title(getString(R.string.your_location)));
+                mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 14));
+            } catch (Exception e) {
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ownerMarker, 13));
+            }
         } else {
             mMap.addMarker(new MarkerOptions().position(ownerMarker).title(getString(R.string.group_location)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ownerMarker, 13));
