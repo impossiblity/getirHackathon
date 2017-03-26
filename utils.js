@@ -1,3 +1,4 @@
+//Source: http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 module.exports.distance = function(coord1, coord2) {
     console.log(coord1);
     console.log(coord2);
