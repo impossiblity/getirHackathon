@@ -126,21 +126,23 @@ mongoose.connect(mongo_url, function(error) {
           if (err) console.log(err)
           else if (reply){ //Book exists in cache
               httpHandler.handleOK(response, JSON.parse(reply));
-              return;
           }
-      });
-      Group.find({_id: {$eq: request.params.id}}).then(function(res){
-          if(!res) {
-              httpHandler.handleWrongSchema(response, 'Post not found');
+          else{
+              Group.find({_id: {$eq: request.params.id}}).then(function(res){
+                  if(!res) {
+                      httpHandler.handleWrongSchema(response, 'Post not found');
+                      return;
+                  }
+                  redis.set(res._id, JSON.stringify(res), function(error){
+                      if(error){
+                          console.log(error)
+                      }
+                  });
+                  httpHandler.handleOK(response, res);
+              }).catch(function(error){
+                  httpHandler.handleWrongSchema(response, error);
+              });
           }
-          redis.set(res._id, JSON.stringify(res), function(error){
-              if(error){
-                  console.log(error)
-              }
-          });
-          httpHandler.handleOK(response, res);
-      }).catch(function(error){
-          httpHandler.handleDatabaseFail(response, error);
       });
   });
 
