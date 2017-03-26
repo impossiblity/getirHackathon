@@ -138,7 +138,13 @@ mongoose.connect(mongo_url, function(error) {
           else {
               Group.findOneAndUpdate({_id: {$eq: request.body._id}},
                   {$push: {messages: {user: request.body.user, message: request.body.message}}}, {new: true}).then(function(res){
-                      return httpHandler.handleCreated(response, res);
+                      redis.set(res._id, JSON.stringify(res), function(error){
+                          if(error){
+                              httpHandler.handleDatabaseFail(response, error);
+                          }
+                          else{
+                              httpHandler.handleCreated(response, res);
+                          }
                   }).catch(function(error){
                       httpHandler.handleDatabaseFail(response, error);
                   });
