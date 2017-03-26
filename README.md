@@ -72,11 +72,11 @@ A utility service for people who are looking for companions to travel. The app s
 ## Technologies Used
 
 * Node.js
- * mongoose
- * express
- * redis
- * body-parser
- * http
+  * mongoose
+  * express
+  * redis
+  * body-parser
+  * http
 * Android
 * MongoDB
 * Redis
