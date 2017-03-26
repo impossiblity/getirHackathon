@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,7 +27,9 @@ public class ChatListActivity extends BaseActivity {
 
     private String startTime, finishTime;
     private int isMoveOnClicked;
+    private LinearLayout pnlRefresh;
     private RelativeLayout pnlErrorScreen;
+    TextView txtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,9 @@ public class ChatListActivity extends BaseActivity {
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
         setContentView(R.layout.activity_chat_list);
-        TextView txtTitle = (TextView) findViewById(R.id.chat_list_title);
+        txtTitle = (TextView) findViewById(R.id.chat_list_title);
         pnlErrorScreen = (RelativeLayout) findViewById(R.id.pnl_error_screen);
+        pnlRefresh = (LinearLayout) findViewById(R.id.pnl_chat_options_move);
 
         isMoveOnClicked = getIntent().getExtras().getInt(BundleKeys.ISMOVEONCLICKED);
 
@@ -183,5 +187,27 @@ public class ChatListActivity extends BaseActivity {
     private void setErrorScreen() {
         showErrorToast(getString(R.string.custom_error));
         pnlErrorScreen.setVisibility(View.VISIBLE);
+
+        pnlRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isConnectingInternet()) {
+                    if (isMoveOnClicked == 0) {
+                        getChatListResponse();
+                    } else if (isMoveOnClicked == 1) {
+                        getSearchResponse();
+                    } else if (isMoveOnClicked == 2) {
+                        getMyGroupsList();
+                        txtTitle.setText(R.string.your_groups);
+                    } else if (isMoveOnClicked == 3){
+                        getMyGroupsList();
+                        txtTitle.setText(R.string.partipiated_groups);
+                    }
+                } else {
+                    showErrorToast(getString(R.string.no_connection));
+                }
+            }
+        });
+
     }
 }
