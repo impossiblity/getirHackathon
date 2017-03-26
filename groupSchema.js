@@ -26,6 +26,8 @@ module.exports = function() {
         return this.model('Group').find({
             location: {$nearSphere: this.location},
             _id: {$ne: this._id},
+            owner: {$ne: this.owner},
+            people: {$ne: this.owner},
             startTime: {$lt: this.endTime},
             endTime: {$gt: this.startTime},
         }).limit(lim).exec(cb);
